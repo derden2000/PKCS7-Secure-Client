@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link th:href="@{/css/bootstrap-social.css}" type="text/css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div align="center">
+    <div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+            </div>
+            <div style="padding-top: 30px" class="panel-body">
+                <form th:action="@{/auth}" method="POST" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-15">
+                            <div>
+                                <div th:if="${param.error} != null">
+                                    <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                        Invalid username and password
+                                    </div>
+                                </div>
+                                <div th:if="${param.logout} != null">
+                                    <div class="alert alert-success col-xs-offset-1 col-xs-10">
+                                        You have been logged out
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" name="username" placeholder="username" class="form-control">
+                    </div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" name="password" placeholder="password" class="form-control">
+                    </div>
+                    <div style="margin-top: 10px" class="form-group">
+                        <div class="col-sm-6 controls">
+                            <button type="submit" class="btn btn-success">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div align="center">
+                <h4 class="heading-desc">or</h4>
+                <a th:href="@{/login/google}" title="Google" class="btn btn-block btn-social btn-lg btn-google">
+                    <i class="fa fa-google"></i> Sign in with Google
+                </a>
+                <a th:href="@{/login/facebook}" title="Facebook" class="btn btn-block btn-social btn-lg btn-facebook">
+                    <i class="fa fa-facebook"></i> Sign in with Facebook
+                </a>
+                <a th:href="@{/login/vk}" title="Vkontakte" class="btn btn-block btn-social btn-lg btn-vk">
+                    <i class="fa fa-vk"></i> Sign in with VKontakte
+                </a>
+                <a th:href="@{/login/yandex}" title="Yandex" class="btn btn-block btn-social btn-lg btn-yahoo">
+                    <i class="fa fa-yahoo"></i> Sign in with Yandex
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
