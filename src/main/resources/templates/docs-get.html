@@ -29,7 +29,7 @@
 
     <h2>Welcome to my fileUploader</h2><br><br>
 
-    <p>Go to page for sending decrypted files:<a th:href="@{/pkcs}">Ссылка</a></p>
+    <p>Скачать файл :<a th:href="@{/docs/download?filename=${fileName}}">Ссылка</a></p>
 
     <div th:replace="~{footer :: footer}" />
 </div>

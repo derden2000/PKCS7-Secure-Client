@@ -12,7 +12,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <title>TextSearch APP</title>
+    <title>Список документов</title>
 
     <link th:href="@{css/bootstrap-social.css}" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -29,7 +29,33 @@
 
     <h2>Welcome to my fileUploader</h2><br><br>
 
-    <p>Go to page for sending decrypted files:<a th:href="@{/pkcs}">Ссылка</a></p>
+    <div class="panel panel-default">
+        <div class="panel-heading">Список документов</div>
+
+        <table class="table" th:if="${docs.size() > 0}">
+            <thead>
+            <tr style="font-weight: bold;">
+                <td>ID</td>
+                <td>Title</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="doc : ${docs}">
+                <td th:text="${doc.id}"/>
+                <td>
+                    <span style="font-weight: bold" th:text="${doc.title}"/>
+                </td>
+                <td>
+                    <form th:action="@{'/docs/view?id=' + ${doc.id}}" method="POST">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Смотреть файл</button>
+                        </div>
+                    </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div th:replace="~{footer :: footer}" />
 </div>

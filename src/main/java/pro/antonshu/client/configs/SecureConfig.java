@@ -52,15 +52,11 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/edit/**").hasAnyRole("MANAGER", "ADMIN")
-                .antMatchers("/admin/**").hasAnyRole("MANAGER", "ADMIN")
-                .antMatchers("/profile/**").authenticated()
-                .antMatchers("/order/**").authenticated()
                 .antMatchers("/user/updatePassword*",
                         "/user/savePassword*",
                         "/updatePassword*")
                 .hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -71,9 +67,7 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .permitAll()
         ;
-        http.csrf()
-                .ignoringAntMatchers("/api/v1/products/**")
-                .ignoringAntMatchers("/ws/**");
+
         http.addFilterBefore(ssoFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
