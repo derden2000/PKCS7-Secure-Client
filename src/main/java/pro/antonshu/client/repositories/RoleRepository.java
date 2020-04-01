@@ -6,4 +6,6 @@ import pro.antonshu.client.entities.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
+
+    Role findOneByTitle(String title);
 }

@@ -14,10 +14,13 @@ public class Document {
 
     private String title;
 
+    private byte[] data;
+
     private String path;
 
-    public Document(String title, String path) {
+    public Document(String title, byte[] data,  String path) {
         this.title = title;
         this.path = path;
+        this.data = data;
     }
 }

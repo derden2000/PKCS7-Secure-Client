@@ -6,6 +6,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -22,7 +23,12 @@ import java.security.cert.CertificateException;
 public class RestTemplateConfig {
 
     private final String keyStoreFile = "src/main/resources/clientkeystore.p12";
-    private final String keyStorePassword = "client";
+    private String keyStorePassword;
+
+    @Value("${secure.keyStorePassword}")
+    public void setKeyStorePassword(String keyStorePassword) {
+        this.keyStorePassword = keyStorePassword;
+    }
 
     @Bean
     public RestTemplate restTemplate() {
@@ -51,11 +57,8 @@ public class RestTemplateConfig {
             e.printStackTrace();
         }
 
-        HttpClient httpClient = HttpClients.custom().setSSLSocketFactory(
-                socketFactory).build();
-
-        ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(
-                httpClient);
+        HttpClient httpClient = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
+        ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         return restTemplate;
     }

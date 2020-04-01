@@ -29,7 +29,20 @@
 
     <h2>Welcome to my fileUploader</h2><br><br>
 
-    <p>Go to page for sending decrypted files:<a th:href="@{/pkcs}">Ссылка</a></p>
+    <form method="POST" th:action="@{/sendpkcs}" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Select a file to upload</td>
+                <td><input type="file" name="files" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Загрузить" /></td>
+            </tr>
+        </table>
+    </form>
+    <br>
+<!--    <p th:if="${answer != null}"><p th:text="'Получен ответ: ' + ${answer}"></p></p>-->
+
 
     <div th:replace="~{footer :: footer}" />
 </div>

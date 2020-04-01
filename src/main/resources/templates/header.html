@@ -20,15 +20,7 @@
                     <a class="nav-link" th:href="@{/}">Главная</a>
                 </li>
                 <li class="nav-item" th:classappend="${activeTab == 'Catalog' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/products}">Каталог</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item"
-                    th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/profile}">Личный кабинет</a>
-                </li>
-                <li sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')" class="nav-item"
-                    th:classappend="${activeTab == 'Admin' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/admin}">Панель управления</a>
+                    <a class="nav-link" th:href="@{/docs?id=0}">Список документов</a>
                 </li>
                 <li sec:authorize="isAnonymous()" class="nav-item"
                     th:classappend="${activeTab == 'Reg' ? 'active' : ''}">
